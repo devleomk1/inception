@@ -6,18 +6,20 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:29:57 by jisokang          #+#    #+#              #
-#    Updated: 2022/07/28 17:17:33 by jisokang         ###   ########.fr        #
+#    Updated: 2022/07/28 17:28:53 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
+RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 ENDCOLOR="\e[0m"
 
 # Make sure only root can run our script
 if (( $EUID != 0 )); then
+	echo -e "root Privileges\t${RED}KO${ENDCOLOR}"
     echo -e "${YELLOW}This script must be run as root${ENDCOLOR}"
     echo -e $EUID
     exit
