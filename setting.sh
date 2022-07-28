@@ -6,17 +6,24 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:29:57 by jisokang          #+#    #+#              #
-#    Updated: 2022/07/28 16:53:04 by jisokang         ###   ########.fr        #
+#    Updated: 2022/07/28 17:14:41 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
 GREEN="\e[32m"
+YELLOW="\e[33m"
 ENDCOLOR="\e[0m"
 
-# 사용자 전환
-su -
+# Make sure only root can run our script
+if (( $EUID != 0 )); then
+    echo "${YELLOW}This script must be run as root${ENDCOLOR}"
+    echo $EUID
+    exit
+fi
+echo "root Privileges\t${GREEN}OK${ENDCOLOR}"
+echo $EUID
 
 # Repository 인덱스 업데이트
 apt-get update
