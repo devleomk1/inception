@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:29:57 by jisokang          #+#    #+#              #
-#    Updated: 2022/07/28 17:14:41 by jisokang         ###   ########.fr        #
+#    Updated: 2022/07/28 17:17:33 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ ENDCOLOR="\e[0m"
 
 # Make sure only root can run our script
 if (( $EUID != 0 )); then
-    echo "${YELLOW}This script must be run as root${ENDCOLOR}"
-    echo $EUID
+    echo -e "${YELLOW}This script must be run as root${ENDCOLOR}"
+    echo -e $EUID
     exit
 fi
-echo "root Privileges\t${GREEN}OK${ENDCOLOR}"
-echo $EUID
+echo -e "root Privileges\t${GREEN}OK${ENDCOLOR}"
+echo -e $EUID
 
 # Repository 인덱스 업데이트
 apt-get update
