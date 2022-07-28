@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/28 16:29:57 by jisokang          #+#    #+#              #
-#    Updated: 2022/07/28 17:28:53 by jisokang         ###   ########.fr        #
+#    Updated: 2022/07/28 17:30:46 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ ENDCOLOR="\e[0m"
 # Make sure only root can run our script
 if (( $EUID != 0 )); then
 	echo -e "root Privileges\t${RED}KO${ENDCOLOR}"
-    echo -e "${YELLOW}This script must be run as root${ENDCOLOR}"
-    echo -e $EUID
-    exit
+	echo -e "${YELLOW}This script must be run as root${ENDCOLOR}"
+	echo -e $EUID
+	exit
 fi
 echo -e "root Privileges\t${GREEN}OK${ENDCOLOR}"
 echo -e $EUID
