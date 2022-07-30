@@ -7,17 +7,20 @@ service:
     image: debian:buster
     # 조건에 관계없이 서비스를 활성 상태로 유지하기 위한 재시작 정책
     restart: always
-    ports:
+    #ports:
+    #  - "443:443"
   mariadb:
     image: debian:buster
     restart: always
+    #expose:
+    #  - "3306"
   wordpress:
     image: debian:buster
     restart: always
+    #expose:
+    #  - "9000"
 
 networks:
   inception_net:
 
-volumes:
-  data: {}
 
