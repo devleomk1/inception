@@ -1,0 +1,7 @@
+version: '3.0'
+service:
+  nginx:
+  db:
+  wordpress:
+
+
