@@ -4,21 +4,28 @@ version: '3.0'
 
 services:
   nginx:
-    image: debian:buster
-    # 조건에 관계없이 서비스를 활성 상태로 유지하기 위한 재시작 정책
+    #빌드할 Dockerfile 위치
+    build: ./requirements/nginx/
+    image: nginx
+    # 조건에 관계없이 서비스를 활성 상태로 유지하기 위한 재시작 정책 -> https://serverfault.com/questions/884759/how-does-restart-always-policy-work-in-docker-compose
     restart: always
-    #ports:
-    #  - "443:443"
-  mariadb:
-    image: debian:buster
-    restart: always
-    #expose:
-    #  - "3306"
-  wordpress:
-    image: debian:buster
-    restart: always
-    #expose:
-    #  - "9000"
+    ports:
+      - "443:443"
+    #environment:
+  #mariadb:
+  #  build: ./requirements/mariadb/
+  #  image: mariadb
+  #  restart: always
+  #  expose:
+  #    - "3306"
+  #  environment:
+  #wordpress:
+  #  build: ./requirements/wordpress/
+  #  image: wordpress
+  #  restart: always
+  #  expose:
+  #    - "9000"
+  #  environment:
 
 networks:
   inception_net:
