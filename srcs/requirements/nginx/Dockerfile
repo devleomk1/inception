@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:51 by jisokang          #+#    #+#              #
-#    Updated: 2022/07/31 19:23:58 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/01 16:21:53 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,12 @@ FROM	debian:buster
 
 LABEL	maintainer="jisokang <jisokang@student.42seoul.kr>"
 
-#RUN		apk update && \
-#		apk add nginx openssl
-
 RUN		apt-get update -y && \
 		apt-get upgrade -y && \
 		apt-get -y install nginx openssl vim
 
 RUN		mkdir /etc/nginx/ssl
+
 RUN		openssl req -newkey rsa:4096 -days 365 -nodes -x509 \
 		-subj "/C=KR/ST=Seoul/L=Seoul/O=42Seoul/OU=Gon/CN=localhost" \
 		-out /etc/nginx/ssl/jisokang.42.fr.crt \
@@ -40,3 +38,6 @@ COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE	443
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# CMD와 무엇이 다른거지?
+# 변경하지 않을 동작이면 entrypoint를 추천한다.
+
