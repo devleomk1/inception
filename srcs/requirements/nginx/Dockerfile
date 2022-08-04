@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:51 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/01 16:21:53 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/04 16:16:55 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ LABEL	maintainer="jisokang <jisokang@student.42seoul.kr>"
 
 RUN		apt-get update -y && \
 		apt-get upgrade -y && \
-		apt-get -y install nginx openssl vim
+		apt-get -y install \
+		nginx \
+		openssl \
+		vim
 
 RUN		mkdir /etc/nginx/ssl
 
