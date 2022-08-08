@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:56 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/04 16:40:56 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/08 15:51:13 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,5 +28,9 @@ RUN		apt-get update -y && \
 		#[필요 없어 보여서 뺀 친구들]
 		#php-xml \
 		#sendmail \
+
+COPY
+
+
 
 # Wordpress + php container
