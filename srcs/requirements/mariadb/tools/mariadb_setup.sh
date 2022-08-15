@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/14 19:41:27 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/14 20:43:54 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,12 +32,12 @@ if [ $? -ne 0 ]; then
 # 쉘 스크립트 특별 변수
 # - $? :직전에 실행한 커맨드의 종료 값(0은 성공, 1은 실패)
 # 출처: https://engineer-mole.tistory.com/200
-mysql -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE";
-mysql -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'";
-mysql -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%'";
-mysql -e "ALTER USER '$MYSQL_ROOT'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES;"
-mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD < ./wp_dump.sql
-mysqladmin -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD shutdown
+mysql -e "CREATE DATABASE IF NOT EXISTS $DATABASE_NAME";
+mysql -e "CREATE USER IF NOT EXISTS '$DATABASE_USER'@'%' IDENTIFIED BY '$DATABASE_PASSWORD'";
+mysql -e "GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$DATABASE_USER'@'%'";
+mysql -e "ALTER USER '$DATABASE_ROOT'@'localhost' IDENTIFIED BY '$DATABASE_ROOT_PASSWORD'; FLUSH PRIVILEGES;"
+mysql $DATABASE_NAME -u$DATABASE_ROOT -p$DATABASE_ROOT_PASSWORD < ./wp_dump.sql
+mysqladmin -u$DATABASE_ROOT -p$DATABASE_ROOT_PASSWORD shutdown
 touch /var/lib/mysql/.setup
 fi
 
