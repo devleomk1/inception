@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:25 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/05 15:56:51 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/15 14:50:07 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,6 @@ RUN		apt-get update -y && \
 		mariadb-server \
 		mariadb-client
 
-COPY	./tools/mariadb_setup /tmp/mariadb_setup.sh
+COPY	./tools/mariadb_setup.sh /tmp/mariadb_setup.sh
 
 ENTRYPOINT ["sh", "/tmp/mariadb_setup.sh"]
