@@ -6,16 +6,13 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/18 20:03:33 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/22 15:08:08 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
 service mysql start;
-
-# -e (--execute=) : 쉘스크립트나 CLI에서 mysql 명령어를 '실행'할 때 사용하는 명령어
-#					https://seul96.tistory.com/332
 
 cat /var/lib/mysql/.setup 2> /dev/null
 # cat의 표준출력을 표준에러로 /dev/null 파일로 출력한다.
@@ -35,10 +32,15 @@ if [ $? -ne 0 ]; then
 # 쉘 스크립트 특별 변수
 # - $? :직전에 실행한 커맨드의 종료 값(0은 성공, 1은 실패)
 # 출처: https://engineer-mole.tistory.com/200
+
+# -e (--execute=) : 쉘스크립트나 CLI에서 mysql 명령어를 '실행'할 때 사용하는 명령어
+#					https://seul96.tistory.com/332
 mysql -e "CREATE DATABASE IF NOT EXISTS $DATABASE_NAME";
 mysql -e "CREATE USER IF NOT EXISTS '$DATABASE_USER'@'%' IDENTIFIED BY '$DATABASE_PASSWORD'";
 mysql -e "GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$DATABASE_USER'@'%'";
-mysql -e "ALTER USER '$DATABASE_ROOT'@'localhost' IDENTIFIED BY '$DATABASE_ROOT_PASSWORD'; FLUSH PRIVILEGES;"
+mysql -e "ALTER USER '$DATABASE_ROOT'@'localhost' IDENTIFIED BY '$DATABASE_ROOT_PASSWORD';"		# ALTER USER : DB의 사용자 계정 정보를 변경합니다.
+mysql -e "FLUSH PRIVILEGES;"																	# FLUSH PRIVILEGES : grant 테이블을 reload함으로서 변경 사항을 즉시 반영하도록 한다.
+
 mysql $DATABASE_NAME -u$DATABASE_ROOT -p$DATABASE_ROOT_PASSWORD < ./wp_dump.sql
 mysqladmin -u$DATABASE_ROOT -p$DATABASE_ROOT_PASSWORD shutdown
 touch /var/lib/mysql/.setup
