@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/28 18:49:58 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/29 22:12:35 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,13 @@ if [ $? -ne 0 ]; then
 mysql -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE";
 mysql -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'";
 mysql -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%'";
-mysql -e "ALTER USER '$MYSQL_ROOT'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"		# ALTER USER : DB의 사용자 계정 정보를 변경합니다.
+#mysql -e "ALTER USER '$MYSQL_ROOT'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"		# ALTER USER : DB의 사용자 계정 정보를 변경합니다.
 mysql -e "FLUSH PRIVILEGES;"																	# FLUSH PRIVILEGES : grant 테이블을 reload함으로서 변경 사항을 즉시 반영하도록 한다.
 
 #mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD < ./wp_dump.sql
 #mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD
 #mysqladmin -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD shutdown
-#touch /var/lib/mysql/.setup
+touch /var/lib/mysql/.setup
 fi
 
 exec mysqld

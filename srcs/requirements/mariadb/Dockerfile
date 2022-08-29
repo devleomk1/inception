@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:25 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/15 14:50:07 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/29 22:13:14 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,4 +22,4 @@ RUN		apt-get update -y && \
 
 COPY	./tools/mariadb_setup.sh /tmp/mariadb_setup.sh
 
-ENTRYPOINT ["sh", "/tmp/mariadb_setup.sh"]
+#ENTRYPOINT ["sh", "/tmp/mariadb_setup.sh"]

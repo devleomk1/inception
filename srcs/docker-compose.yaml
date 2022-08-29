@@ -43,7 +43,8 @@ services:
     image: wordpress
     restart: always
     expose:
-      - "9000"
+      - 80:80
+      #- "9000"
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=wordpress
