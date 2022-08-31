@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/30 23:39:06 by jisokang         ###   ########.fr        #
+#    Updated: 2022/08/31 12:21:53 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ DB_PATH	= /home
 all		:	$(NAME)
 
 $(NAME)	:
-	sudo mkdir -p /
+##Path 변경해야함!
+	mkdir -p ./data/mariadb/
+	mkdir -p ./data/wordpress/
+	docker-compose -f ./srcs/docker-compose.yaml up --build
 
 help	: ## 실행가능한 명령을 출력
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m %-5s\033[0m \t%s\n", $$1, $$2}'
