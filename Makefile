@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/31 12:21:53 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/01 17:05:31 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,12 @@ down	: ## 컨테이너들을 일괄 정지
 	@echo "Down all"
 	docker-compose -f ./srcs/docker-compose.yaml down
 
-clean	: down ## 컨테이너를 일괄정지 하고 이미지까지 전부 삭제
+clean	: ## 컨테이너를 일괄정지 하고 이미지와 연결된 볼륨 전부 삭제
+	docker-compose -f ./srcs/docker-compose.yaml down --rmi -volumes
 
-fclean	: ## 볼륨까지 전부 삭제
+fclean	: clean ## 로컬 볼륨 파일까지 전부 삭제
+	rm -rf ./data/mariadb/*
+	rm -rf ./data/wordpress/*
 
 re	: fclean all ## fclean 실행 후 다시 make 실행
 
