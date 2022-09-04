@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/01 17:05:31 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/04 22:53:29 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ $(NAME)	:
 	docker-compose -f ./srcs/docker-compose.yaml up --build
 
 help	: ## 실행가능한 명령을 출력
+	@echo " make [command]"
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m %-5s\033[0m \t%s\n", $$1, $$2}'
 
 down	: ## 컨테이너들을 일괄 정지
