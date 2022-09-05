@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/05 12:45:00 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/05 21:17:27 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ $(NAME)	:
 ##Path 변경해야함!
 	mkdir -p ./data/mariadb/
 	mkdir -p ./data/wordpress/
-	docker-compose -f ./srcs/docker-compose.yaml up --build
+	docker-compose -f ./srcs/docker-compose.yaml up --build -d
 
 help	: ## 실행가능한 명령을 출력
 	@echo " make [command]"
@@ -31,8 +31,8 @@ down	: ## 컨테이너들을 일괄 정지
 	@echo "Down all"
 	docker-compose -f ./srcs/docker-compose.yaml down
 
-clean	: ## 컨테이너를 일괄정지 하고 이미지와 연결된 볼륨 전부 삭제
-	docker-compose -f ./srcs/docker-compose.yaml down --rmi -volumes
+clean	: ## 컨테이너를 일괄정지 하고 모든 이미지와 연결된 볼륨 전부 삭제
+	docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
 
 fclean	: clean ## 로컬 볼륨 파일까지 전부 삭제
 	rm -rf ./data/mariadb/*
