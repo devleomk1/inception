@@ -6,12 +6,14 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/04 22:53:29 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/05 12:45:00 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= inception
 DB_PATH	= /home
+BLUE	= \033[36m
+COLR	= \033[0m
 
 all		:	$(NAME)
 
@@ -23,7 +25,7 @@ $(NAME)	:
 
 help	: ## 실행가능한 명령을 출력
 	@echo " make [command]"
-	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m %-5s\033[0m \t%s\n", $$1, $$2}'
+	@egrep -h '\s##\s' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "$(BLUE) %-5s$(COLR) \t%s\n", $$1, $$2}'
 
 down	: ## 컨테이너들을 일괄 정지
 	@echo "Down all"
