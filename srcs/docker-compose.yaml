@@ -1,3 +1,9 @@
+# ##################################################### #
+#                                                       #
+# Docker-compose file for Inception                     #
+#                                                       #
+# ##################################################### #
+
 # Compose file의 버전
 # docker-compose의 버전에 따라 사용할 수 있는 compose file 버전이 다르다. 도커-컴포즈 1.27.0 버전 이후부터는 2.x와 3.x가 사용 가능.
 version: '3.0'
@@ -12,48 +18,45 @@ services:
     # 어떤 이유로든 컨테이너가 종료되었을 경우, 재시작을 위한 설정이다.
       # always : 컨테이너를 수동으로 끄기 전까지 항상 재시작
     restart: always
+    depends_on:
+      - wordpress
     ports:
       - "443:443"
-
+    env_file:
+      - .env
     #environment:
     # Dockerfile의 각종 환경변수를 설정하는 ENV 옵션과 동일하다.
     # environment로 바로 환경 변수를 설정할 수 있지만, env_file 옵션으로 파일을 읽어 올 수 있다.
       # env_file의 파일명을 .txt 등의 확장자로 만들어도 되지만, 도커 공식 가이드에 따라 .env를 쓰는 게 좋다.
-    #env_file:
-    #  - .env
+    networks:
+      - inception_net
   mariadb:
     build: ./requirements/mariadb/
     image: mariadb
-    restart: always
+    #restart: always
     expose:
       - "3306"
     volumes:
       - db_volume:/var/lib/mysql/
       #[호스트 디렉토리]:[컨테이너 디렉토리]
-    #env_file:
-    #  - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=somewordpress
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
-      #- MYSQL_ROOT=root
+    env_file:
+      - .env
+    networks:
+      - inception_net
   wordpress:
-    #build: ./requirements/wordpress/
+    build: ./requirements/wordpress/
     image: wordpress
-    restart: always
+    #restart: always
+    depends_on:
+      - mariadb
     expose:
       - "9000"
-      #- 80:80
-    environment:
-      - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_USER=wordpress
-      - WORDPRESS_DB_PASSWORD=wordpress
-      - WORDPRESS_DB_NAME=wordpress
-    #volumes:
-    #  - wp_volume:/var/www/
-    #env_file:
-      #- .env
+    volumes:
+      - wp_volume:/var/www/html
+    env_file:
+      - .env
+    networks:
+      - inception_net
 
 # 컨테이너에서 사용하는 volume 설정으로 대체 가능(옵션)
 volumes:
@@ -66,13 +69,13 @@ volumes:
       #device: /home/jisokang/data/mariadb
       o: bind
       #volume을 bind로 묶어줘야 docker가 내 volume을 찾을 수 있다.
-  #wp_volume:
-  #  driver: local
-  #  driver_opts:
-  #    type: none
-  #    device: ~/inception/data/wordpress
-  #    #device: /home/jisokang/data/wordpress
-  #    o: bind
+  wp_volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/devleo/inception/data/wordpress
+      #device: /home/jisokang/data/wordpress
+      o: bind
 
 networks:
   inception_net:
