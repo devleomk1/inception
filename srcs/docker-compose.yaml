@@ -33,7 +33,7 @@ services:
   mariadb:
     build: ./requirements/mariadb/
     image: mariadb
-    #restart: always
+    restart: always
     expose:
       - "3306"
     volumes:
@@ -46,7 +46,7 @@ services:
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
-    #restart: always
+    restart: always
     depends_on:
       - mariadb
     expose:
