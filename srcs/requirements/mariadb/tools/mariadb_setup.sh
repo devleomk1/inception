@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/06 19:29:33 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/08 20:56:28 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 service mysql start;
 
-cat /var/lib/mysql/.setup 2> /dev/null
+#cat /var/lib/mysql/.setup 2> /dev/null
 # cat의 표준출력을 표준에러로 /dev/null 파일로 출력한다.
 # 파일이 있으면 아무런 메세지도 출력하지 않지만, 파일이 없으면 에러가 출력된다.
 # cat을 이용해 파일이 있는지 없는지 체크하는 것.
@@ -24,7 +24,7 @@ cat /var/lib/mysql/.setup 2> /dev/null
 # 평가표에
 # 서버를 껏다가 다시 켜도 DB데이터가 남아 있어야 하는 항목이 있어서! 꼭 체크 해야함.
 
-if [ $? -ne 0 ]; then
+#if [ $? -ne 0 ]; then
 # 쉘스크립트의 if문
 # -ne : 값이 다르면 (not equl)
 # -eq : 값이 같으면 (equl)
@@ -56,8 +56,8 @@ if [ $? -ne 0 ]; then
 ##mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD
 ##mysqladmin -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD shutdown
 #touch /var/lib/mysql/.setup
-fi
+#fi
 
-exec mysqld
+#exec mysqld
 # MySQL + Daemon
 # https://velog.io/@seomoon/mysql-mysqld
