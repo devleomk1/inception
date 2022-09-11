@@ -8,6 +8,26 @@
 # docker-compose의 버전에 따라 사용할 수 있는 compose file 버전이 다르다. 도커-컴포즈 1.27.0 버전 이후부터는 2.x와 3.x가 사용 가능.
 version: '3.0'
 
+
+# 컨테이너에서 사용하는 volume 설정으로 대체 가능(옵션)
+volumes:
+  db_volume:
+    driver: local
+    #driver_opts: linux 명령어 mount에 의존한다.
+    driver_opts:
+      type: none
+      device: /Users/devleo/inception/data/mariadb
+      #device: /home/jisokang/data/mariadb
+      o: bind
+      #volume을 bind로 묶어줘야 docker가 내 volume을 찾을 수 있다.
+  wp_volume:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/devleo/inception/data/wordpress
+      #device: /home/jisokang/data/wordpress
+      o: bind
+
 # 생성할 컨테이너
 services:
   nginx:
@@ -33,7 +53,8 @@ services:
   mariadb:
     build: ./requirements/mariadb/
     image: mariadb
-    restart: always
+    #restart: always
+    restart: "no"
     expose:
       - "3306"
     volumes:
@@ -43,10 +64,12 @@ services:
       - .env
     networks:
       - inception_net
+    command: sleep infinity
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
-    restart: always
+    #restart: always
+    restart: "no"
     depends_on:
       - mariadb
     expose:
@@ -57,25 +80,8 @@ services:
       - .env
     networks:
       - inception_net
+    command: sleep infinity
 
-# 컨테이너에서 사용하는 volume 설정으로 대체 가능(옵션)
-volumes:
-  db_volume:
-    driver: local
-    #driver_opts: linux 명령어 mount에 의존한다.
-    driver_opts:
-      type: none
-      device: /Users/devleo/inception/data/mariadb
-      #device: /home/jisokang/data/mariadb
-      o: bind
-      #volume을 bind로 묶어줘야 docker가 내 volume을 찾을 수 있다.
-  wp_volume:
-    driver: local
-    driver_opts:
-      type: none
-      device: /Users/devleo/inception/data/wordpress
-      #device: /home/jisokang/data/wordpress
-      o: bind
 
 networks:
   inception_net:

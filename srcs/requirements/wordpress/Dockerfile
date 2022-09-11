@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:56 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/07 17:17:33 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/11 15:40:07 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ RUN		wget https://wordpress.org/latest.tar.gz
 COPY	./tools/wordpress_setup.sh /tmp/wordpress_setup.sh
 
 ENTRYPOINT ["sh", "/tmp/wordpress_setup.sh"]
+
+#CMD tail -f /dev/null
 
 EXPOSE	9000
 # Wordpress + php container

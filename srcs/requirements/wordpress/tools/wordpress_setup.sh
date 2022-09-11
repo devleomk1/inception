@@ -6,14 +6,21 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 17:12:47 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/08 20:38:09 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/11 15:33:17 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
-tar -xzvf latest.tar.gz
-mkdir -p /var/www/html/
-mv wordpress/ /var/www/html/
-chown -R www-data:www-data /var/www/html/wordpress
-exec php-fpm7 -F
+cat /var/www/html/.setup 2> /dev/null
+
+if [ $? -ne 0 ]; then
+	tar -xzvf latest.tar.gz
+	mkdir -p /var/www/html/
+	mv wordpress/ /var/www/html/
+	chown -R www-data:www-data /var/www/html/wordpress
+	touch /var/www/html/.setup
+fi
+#exec php7.3-fpm
+service php7.3-fpm start
+
