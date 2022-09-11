@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/08 20:52:32 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/11 14:41:11 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ clean	: ## 컨테이너를 일괄정지 하고 모든 이미지와 연결된 볼
 	docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
 
 fclean	: clean ## 로컬 볼륨 파일까지 전부 삭제
+	rm -rf ./data/mariadb/.setup
 	rm -rf ./data/mariadb/*
+	rm -rf ./data/wordpress/.setup
 	rm -rf ./data/wordpress/*
 	docker system prune -a -f --volumes
 
