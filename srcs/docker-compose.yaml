@@ -38,6 +38,8 @@ services:
     # 어떤 이유로든 컨테이너가 종료되었을 경우, 재시작을 위한 설정이다.
       # always : 컨테이너를 수동으로 끄기 전까지 항상 재시작
     restart: always
+    volumes:
+      - wp_volume:/var/www/html/wordpress
     depends_on:
       - wordpress
     ports:
@@ -50,11 +52,12 @@ services:
       # env_file의 파일명을 .txt 등의 확장자로 만들어도 되지만, 도커 공식 가이드에 따라 .env를 쓰는 게 좋다.
     networks:
       - inception_net
+    tty: true
   mariadb:
     build: ./requirements/mariadb/
     image: mariadb
+    restart: always
     #restart: always
-    restart: "no"
     expose:
       - "3306"
     volumes:
@@ -64,26 +67,24 @@ services:
       - .env
     networks:
       - inception_net
-    command: sleep infinity
+    tty: true
   wordpress:
     build: ./requirements/wordpress/
     image: wordpress
-    #restart: always
-    restart: "no"
+    restart: always
     depends_on:
       - mariadb
     expose:
       - "9000"
     volumes:
-      - wp_volume:/var/www/html/
+      - wp_volume:/var/www/html/wordpress
     env_file:
       - .env
     networks:
       - inception_net
-    command: sleep infinity
-
 
 networks:
   inception_net:
+    driver: bridge
 
 
