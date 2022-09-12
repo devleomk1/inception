@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/11 17:24:32 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/12 18:41:11 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ if [ $? -ne 0 ]; then
 	touch /var/lib/mysql/.setup
 fi
 
-exec mysqld
+#service mysql stop;
+exec mysqld --console
 # MySQL + Daemon
 # https://velog.io/@seomoon/mysql-mysqld
