@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:56 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/11 15:40:07 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/12 21:32:38 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,24 +17,23 @@ LABEL	maintainer="jisokang <jisokang@student.42seoul.kr>"
 RUN		apt-get update -y && \
 		apt-get upgrade -y && \
 		apt-get -y install \
+		mariadb-client \
 		wget \
 		curl \
 		tar \
 		php7.3-fpm \
 		php-cli \
 		php-mysql \
-		vim
-		#[필요 없어 보여서 뺀 친구들]
-		#php-xml \
-		#sendmail \
-
-RUN		wget https://wordpress.org/latest.tar.gz
+		vim \
+		sudo
 
 COPY	./tools/wordpress_setup.sh /tmp/wordpress_setup.sh
+COPY	./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+RUN		wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/bin/wp
 
-ENTRYPOINT ["sh", "/tmp/wordpress_setup.sh"]
-
-#CMD tail -f /dev/null
+WORKDIR	/var/www/html/wordpress
+RUN		mkdir -p /run/php
 
 EXPOSE	9000
-# Wordpress + php container
+
+ENTRYPOINT ["sh", "/tmp/wordpress_setup.sh"]
