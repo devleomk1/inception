@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/01 18:10:00 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/12 18:41:11 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/13 14:29:30 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,6 @@ cat /var/lib/mysql/.setup 2> /dev/null
 # cat을 이용해 파일이 있는지 없는지 체크하는 것.
 # https://blogger.pe.kr/369
 # 이를 이용해 db가 사용자 정의 파일로 이미 설정되었는지 여부 확인한다.
-
-# 평가표에
-# 서버를 껏다가 다시 켜도 DB데이터가 남아 있어야 하는 항목이 있어서! 꼭 체크 해야함.
 
 if [ $? -ne 0 ]; then
 # 쉘스크립트의 if문
@@ -45,13 +42,9 @@ if [ $? -ne 0 ]; then
 	mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD
 	mysqladmin -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD shutdown
 
-##mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD < ./wp_dump.sql
-##mysql $MYSQL_DATABASE -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD
-##mysqladmin -u$MYSQL_ROOT -p$MYSQL_ROOT_PASSWORD shutdown
 	touch /var/lib/mysql/.setup
 fi
 
-#service mysql stop;
 exec mysqld --console
 # MySQL + Daemon
 # https://velog.io/@seomoon/mysql-mysqld
