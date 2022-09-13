@@ -4,6 +4,7 @@
 ### db_volume ##
 
 data/mariadb/*
+data/wordpress/*
 
 ### Linux ###
 *~
