@@ -6,23 +6,22 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/11 14:41:11 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/13 14:46:21 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= inception
-DB_PATH	= /home
+DB_PATH	= ./data
+##Path 변경해야함!
 BLUE	= \033[36m
 COLR	= \033[0m
 
 all		:	$(NAME)
 
 $(NAME)	:
-##Path 변경해야함!
-	mkdir -p ./data/mariadb/
-	mkdir -p ./data/wordpress/
+	mkdir -p $(DB_PATH)/mariadb/
+	mkdir -p $(DB_PATH)/wordpress/
 	docker-compose -f ./srcs/docker-compose.yaml up --build
-#docker-compose -f ./srcs/docker-compose.yaml up --build -d
 
 help	: ## 실행가능한 명령을 출력
 	@echo " make [command]"
@@ -33,14 +32,18 @@ down	: ## 컨테이너들을 일괄 정지
 	docker-compose -f ./srcs/docker-compose.yaml down
 
 clean	: ## 컨테이너를 일괄정지 하고 모든 이미지와 연결된 볼륨 전부 삭제
-	docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
+	docker-compose -f ./srcs/docker-compose.yaml down
+#docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
 
 fclean	: clean ## 로컬 볼륨 파일까지 전부 삭제
-	rm -rf ./data/mariadb/.setup
-	rm -rf ./data/mariadb/*
-	rm -rf ./data/wordpress/.setup
-	rm -rf ./data/wordpress/*
-	docker system prune -a -f --volumes
+	rm -rf $(DB_PATH)/mariadb/.setup
+	rm -rf $(DB_PATH)/mariadb/*
+	rm -rf $(DB_PATH)/wordpress/.setup
+	rm -rf $(DB_PATH)/wordpress/*
+#docker stop $(docker ps -qa); docker rm $(docker ps -qa);
+#docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q);
+#docker network rm $(docker network ls -q) 2>/dev/null
+#docker system prune -a -f --volumes
 
 re	: fclean all ## fclean 실행 후 다시 make 실행
 
