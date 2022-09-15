@@ -72,15 +72,16 @@ volumes:
     driver: local
     driver_opts:    #driver_opts: linux 명령어 mount에 의존한다.
       type: none
-      device: /Users/devleo/inception/data/mariadb
+      #device: /Users/devleo/inception/data/mariadb
+      device: /home/jisokang/data/mariadb
       o: bind
       #volume을 bind로 묶어줘야 docker가 내 volume을 찾을 수 있다.
   wp_volume:
     driver: local
     driver_opts:
       type: none
-      device: /Users/devleo/inception/data/wordpress
-      #device: /home/jisokang/data/wordpress
+      #device: /Users/devleo/inception/data/wordpress
+      device: /home/jisokang/data/wordpress
       o: bind
 
 # NETWORKS:
