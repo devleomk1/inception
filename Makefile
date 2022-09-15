@@ -6,12 +6,13 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/13 14:46:21 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/15 20:44:47 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= inception
-DB_PATH	= ./data
+#DB_PATH	= ./data
+DB_PATH	= /home/jisokang/data
 ##Path 변경해야함!
 BLUE	= \033[36m
 COLR	= \033[0m
