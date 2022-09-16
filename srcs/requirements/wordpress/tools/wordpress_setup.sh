@@ -6,20 +6,15 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 17:12:47 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/15 20:48:42 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/16 14:34:38 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
-#while ! mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD &>/dev/null; do
-	#echo "waiting for $WORDPRESS_DB_HOST ..."
-#	sleep 2
-#done
 sleep 2
 chown -R www-data:www-data /var/www/
 
-#if [ ! sudo -u www-data sh -c 'wp core is-installed' ]; then
 if [ ! -f "/var/www/html/wordpress/index.php" ]; then
 	sudo -u www-data sh -c " \
 	wp core download --locale=$WORDPRESS_LANG && \

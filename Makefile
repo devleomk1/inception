@@ -6,14 +6,12 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/16 14:06:57 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/16 14:36:42 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= inception
-#DB_PATH	= ./data
 DB_PATH	= /home/jisokang/data
-##Path 변경해야함!
 BLUE	= \033[36m
 COLR	= \033[0m
 
@@ -34,18 +32,14 @@ down	: ## 컨테이너들을 일괄 정지
 	docker-compose -f ./srcs/docker-compose.yaml down
 
 clean	: ## 컨테이너를 일괄정지 하고 모든 이미지와 연결된 볼륨 전부 삭제
-	docker-compose -f ./srcs/docker-compose.yaml down
-#docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
+	docker-compose -f ./srcs/docker-compose.yaml down --rmi "all" --volumes
+#docker-compose -f ./srcs/docker-compose.yaml down
 
 fclean	: clean ## 로컬 볼륨 파일까지 전부 삭제
 	rm -rf $(DB_PATH)/mariadb/.setup
 	rm -rf $(DB_PATH)/mariadb/*
 	rm -rf $(DB_PATH)/wordpress/.setup
 	rm -rf $(DB_PATH)/wordpress/*
-#docker stop $(docker ps -qa); docker rm $(docker ps -qa);
-#docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q);
-#docker network rm $(docker network ls -q) 2>/dev/null
-#docker system prune -a -f --volumes
 
 re	: fclean all ## fclean 실행 후 다시 make 실행
 

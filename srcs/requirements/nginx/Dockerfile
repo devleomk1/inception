@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/31 13:21:51 by jisokang          #+#    #+#              #
-#    Updated: 2022/08/04 16:16:55 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/16 14:34:49 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,5 @@ COPY	conf/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE	443
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
-# CMD와 무엇이 다른거지?
 # 변경하지 않을 동작이면 entrypoint를 추천한다.
 
