@@ -6,7 +6,7 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/15 20:44:47 by jisokang         ###   ########.fr        #
+#    Updated: 2022/09/16 14:06:57 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ all		:	$(NAME)
 $(NAME)	:
 	mkdir -p $(DB_PATH)/mariadb/
 	mkdir -p $(DB_PATH)/wordpress/
+	sudo echo "127.0.0.1	jisokang.42.fr" > /etc/hosts
 	docker-compose -f ./srcs/docker-compose.yaml up --build
 
 help	: ## 실행가능한 명령을 출력
