@@ -6,21 +6,30 @@
 #    By: jisokang <jisokang@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/30 17:02:16 by jisokang          #+#    #+#              #
-#    Updated: 2022/09/16 14:53:03 by jisokang         ###   ########.fr        #
+#    Updated: 2022/10/07 15:14:45 by jisokang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= inception
-DB_PATH	= /home/jisokang/data
 BLUE	= \033[36m
 COLR	= \033[0m
+
+UNAME	:= $(shell uname -s)
+ifeq ($(UNAME),Darwin)	#macOS
+	DB_PATH		:= ./data
+	HOST_LINK	:=
+else					#Linux
+	DB_PATH		:= /home/jisokang/data
+	HOST_LINK	:= "127.0.0.1	jisokang.42.fr" > /etc/hosts
+endif
 
 all		:	$(NAME)
 
 $(NAME)	:
+	@echo "inception for $(BLUE)$(UNAME)$(COLR) OS setup start"
 	mkdir -p $(DB_PATH)/mariadb/
 	mkdir -p $(DB_PATH)/wordpress/
-	sudo echo "127.0.0.1	jisokang.42.fr" > /etc/hosts
+	@sudo echo $(HOST_LINK)
 	docker-compose -f ./srcs/docker-compose.yaml up --build
 
 help	: ## 실행가능한 명령을 출력
